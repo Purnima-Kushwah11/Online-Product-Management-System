@@ -1,0 +1,7 @@
+package test;
+
+public class AddProductDAO
+{
+	AdminBean ab=null;
+	
+}

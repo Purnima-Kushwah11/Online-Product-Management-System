@@ -1,0 +1,40 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8" import="test.*,java.util.*"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<%
+AdminBean ab=(AdminBean)session.getAttribute("bean");
+ArrayList<ProdcutBean> al= (ArrayList<ProdcutBean>)session.getAttribute("alist");
+out.println("Welcome Admin: "+ab.getFname()+"<br>");
+if(al.size()==0)
+{
+	out.println("Product not availabe!!!");
+}
+else
+{
+	Iterator<ProdcutBean> it=al.iterator();
+	while(it.hasNext())
+	{
+		ProdcutBean pb=(ProdcutBean)it.next();
+		out.println(pb.getPid()+"&nbsp&nbsp"
+		+pb.getPname()+"&nbsp&nbsp"
+		+pb.getPrice()+"&nbsp&nbsp"
+		+pb.getQty()+"&nbsp&nbsp"
+		+"<a href='edit?pId="+pb.getPid()+"'>Edit</a>"+"&nbsp&nbsp"
+		+"<a href='delete?pId="+pb.getPid()+"'>Delete</a>"+"<br>");
+		
+		
+	}
+	
+}
+%>
+<a href="Product.html"> Add Product</a>
+<a href="logout">Logout</a>
+
+</body>
+</html>

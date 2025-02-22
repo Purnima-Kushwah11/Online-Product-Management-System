@@ -1,0 +1,24 @@
+package test;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+
+public class CustomerDAO
+{
+	public int insertCustomer(CustomerBean cb)
+	{
+		
+		try
+		{
+		Connection con=DBConnection.getCon();
+		PreparedStatement ps=con.prepareStatement("insert into admin70 values(?,?,?,?,?,?,?)");
+		ps.setString(1, ps.get);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		
+	}
+
+}

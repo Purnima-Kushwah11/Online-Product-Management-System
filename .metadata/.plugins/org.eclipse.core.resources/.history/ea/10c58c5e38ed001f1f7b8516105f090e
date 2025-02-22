@@ -1,0 +1,12 @@
+package test;
+
+public class AddProductDAO
+{
+	ProdcutBean p=null;
+	public ProdcutBean insertProdcut(int id,String name , double price, int qty)
+	{
+		
+	}
+	
+	
+}

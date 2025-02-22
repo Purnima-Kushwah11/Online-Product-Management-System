@@ -1,0 +1,100 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Message</title>
+    <style>
+        /* Reset Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body Background */
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #FF6F61, #DE5499, #7257FA);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            flex-direction: column;
+        }
+
+        /* Message Box */
+        .message-container {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            width: 80%;
+            max-width: 400px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            animation: fadeIn 1s ease-in-out;
+            display: none; /* Initially hidden */
+        }
+
+        /* Message Styling */
+        .message {
+            color: white;
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        /* Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .message-container {
+                padding: 15px;
+            }
+            .message {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="message-container" id="msgBox">
+        <%
+            String msg = (String) session.getAttribute("msg");
+            if (msg != null) {
+                out.println("<p class='message'>" + msg + "</p>");
+                session.removeAttribute("msg"); // Clear message after displaying
+            } else {
+                out.println("<p class='message'>No new messages.</p>");
+            }
+        %>
+    </div>
+
+    <%@ include file="AdminLoginSuccess.jsp" %>
+
+    <script>
+        // Show message container with fade-in effect
+        window.onload = function() {
+            let msgBox = document.getElementById("msgBox");
+            if (msgBox) {
+                msgBox.style.display = "block";
+                msgBox.style.opacity = "0";
+                setTimeout(() => {
+                    msgBox.style.transition = "opacity 1s";
+                    msgBox.style.opacity = "1";
+                }, 500);
+            }
+        };
+    </script>
+
+</body>
+</html>

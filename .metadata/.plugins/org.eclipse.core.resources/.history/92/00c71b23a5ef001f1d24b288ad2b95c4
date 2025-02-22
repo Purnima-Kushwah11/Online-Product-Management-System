@@ -1,0 +1,82 @@
+package test;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.SQLException;
+
+import jakarta.servlet.RequestDispatcher;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
+@WebServlet("/AddProduct")
+public class AddProductServlet extends HttpServlet
+{
+	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException
+	{
+//		int code = Integer.parseInt(req.getParameter("pcode"));
+//		String name = req.getParameter("pname");
+//		double price = Double.parseDouble(req.getParameter("pprice"));
+//		int qty = Integer.parseInt(req.getParameter("pqty"));
+////		PrintWriter pw = res.getWriter();
+////		res.setContentType("text/html");
+//       ProdcutBean pb=new ProdcutBean(code,name,price,qty);
+//		try
+//		{
+//			int insertProdcut = new AddProductDAO().insertProdcut(pb);
+//
+//			if (insertProdcut > 0) 
+//			{
+//				req.setAttribute("msg","Product Added Successfully!!!");
+//				req.getRequestDispatcher("ProductSuccess.jsp").forward(req, res);
+//			} 
+//			else 
+//			{
+//
+//			}
+//		}
+//		catch (SQLException e) 
+//		{
+//			
+//			e.printStackTrace();
+//		}
+		
+		HttpSession hs = req.getSession(false);
+		if(hs==null)
+		{
+			req.setAttribute("msg", "Session Expired!!<br>");
+			RequestDispatcher rd= req.getRequestDispatcher("msg.jsp");
+			rd.forward(req, res);
+			
+		}
+		else
+		{
+			ProdcutBean pb= new ProdcutBean();
+			pb.setPid(Integer.parseInt(req.getParameter("pcode")));
+			pb.setPname(req.getParameter("pname"));
+			pb.setPrice(Double.parseDouble(req.getParameter("pprice")));
+			pb.setQty(Integer.parseInt(req.getParameter("pqty")));
+			 try
+			 {
+				 AddProductDAO add = new AddProductDAO();
+				 int k = add.insertProdcut(pb);
+				 if(k>0)
+				 {
+					 req.setAttribute("msg", "Product Addedd SuccessFully!!<br>");
+					 RequestDispatcher rd = req.getRequestDispatcher("productsuccess.jsp");
+					 rd.forward(req, res);
+					 
+					 
+				 }
+			 }
+			 catch(Exception e)
+			 {
+				 e.printStackTrace();
+			 }
+		}
+		
+	}
+}

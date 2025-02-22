@@ -1,0 +1,44 @@
+package test;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.SQLException;
+
+import jakarta.servlet.RequestDispatcher;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
+@WebServlet("/cus")
+public class CustomerRegisterServlet extends HttpServlet
+{
+	
+	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException
+	{
+		PrintWriter pw = res.getWriter();
+		String name = req.getParameter("uname");
+		String pword = req.getParameter("pword");
+		String fname = req.getParameter("fname");
+		String lname = req.getParameter("lname");
+		String city = req.getParameter("city");
+		String MailId = req.getParameter("mid");
+		long phno = Long.parseLong(req.getParameter("phno"));
+		CustomerBean c=new CustomerBean(name,pword,fname,lname,city,MailId,phno);
+		int insertCustomer = new CustomerDAO().insertCustomer(c);
+		if(insertCustomer>0)
+		{
+			
+			RequestDispatcher rd= req.getRequestDispatcher("AdminLoginSuccess.jsp");
+			rd.include(req, res);
+			
+			
+		}
+		else
+		{
+			pw.println("re")
+		}
+	}
+
+}

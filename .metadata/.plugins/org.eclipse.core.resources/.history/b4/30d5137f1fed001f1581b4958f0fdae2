@@ -1,0 +1,21 @@
+<%@page import="test.AdminBean"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<%
+AdminBean ab = (AdminBean)session.getAttribute("bean");
+out.println("Welcome Admin :"+ab.getfName()+"<br");
+
+%>
+
+<a href="Product.html">ddProduct</a>
+<a href="view">viewAllProduct</a>
+<a href="logout">logout</a>
+</body>
+</html>

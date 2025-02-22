@@ -1,0 +1,22 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8" import="java.util.*"%>
+    <%@ page import="test.ProdcutBean" %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<% List<ProdcutBean> listOfProductBean=(List<ProdcutBean>)request.getAttribute("pData"); 
+for(ProdcutBean pb:listOfProductBean)
+{
+	out.println(pb.getPid());
+	out.println(pb.getPname());
+	out.println(pb.getPrice());
+	out.println(pb.getQty());
+}
+%>
+<%@include file="AdminLoginSuccess.jsp" %>
+</body>
+</html>

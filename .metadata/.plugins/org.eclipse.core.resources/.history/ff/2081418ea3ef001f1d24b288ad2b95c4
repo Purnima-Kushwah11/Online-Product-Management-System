@@ -1,0 +1,110 @@
+<%@page import="test.AdminBean"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <style>
+        /* Resetting default margins and paddings */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body styling */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        /* Dashboard Container */
+        .dashboard-container {
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+        }
+
+        h2 {
+            color: #007bff;
+            margin-bottom: 30px;
+            font-size: 1.8rem;
+        }
+
+        /* Links Styling */
+        a {
+            display: inline-block;
+            margin: 15px 0;
+            padding: 12px 25px;
+            background-color: #28a745;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 16px;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+
+        a:hover {
+            background-color: #218838;
+        }
+
+        /* Logout Styling */
+        .logout {
+            background-color: #dc3545;
+        }
+
+        .logout:hover {
+            background-color: #c82333;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            .dashboard-container {
+                padding: 30px;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            a {
+                font-size: 14px;
+                padding: 10px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="dashboard-container">
+        <h2>Welcome Admin</h2>
+
+        <%
+            AdminBean ab = (AdminBean) session.getAttribute("bean");
+            if (ab != null) {
+                out.println("<p>Hello, " + ab.getUname() + "!</p>");
+            } else {
+                out.println("<p>User not found</p>");
+            }
+        %>
+
+        <a href="Product.html">Add Product</a>
+        <a href="view">View All Products</a>
+        <a href="Logout" class="logout">Logout</a>
+    </div>
+
+</body>
+</html>

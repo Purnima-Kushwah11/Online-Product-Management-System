@@ -1,0 +1,44 @@
+package test;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.SQLException;
+
+import jakarta.servlet.RequestDispatcher;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
+@WebServlet("/AddProduct")
+public class AddProductServlet extends HttpServlet
+{
+	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException 
+	{
+		int code = Integer.parseInt(req.getParameter("pcode"));
+		String name= req.getParameter("pname");
+		double price =Double.parseDouble(req.getParameter("pprice"));
+		int qty = Integer.parseInt(req.getParameter("pqty"));
+		PrintWriter pw=res.getWriter();
+		res.setContentType("text/html");
+		
+		try {
+			int insertProdcut = new AddProductDAO().insertProdcut(code, name, code, qty);
+			
+			if(insertProdcut>0)
+			{
+				pw.print("Data Inserted")
+				req.getRequestDispatcher("Prodct.html").forward(req, res);
+			}
+			else
+			{
+				
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+}

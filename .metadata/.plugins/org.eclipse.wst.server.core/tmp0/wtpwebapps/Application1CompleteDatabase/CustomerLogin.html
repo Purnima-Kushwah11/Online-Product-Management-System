@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Registration</title>
+    <style>
+        /* Reset Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body Background */
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #FF6F61, #DE5499, #7257FA);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        /* Form Container */
+        .form-container {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        /* Heading */
+        h2 {
+            color: white;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+
+        /* Input Fields */
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        /* Submit Button */
+        .register-btn {
+            background: linear-gradient(45deg, #28a745, #218838);
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            padding: 12px;
+            width: 100%;
+            border-radius: 8px;
+            transition: 0.3s;
+        }
+
+        .register-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 10px rgba(40, 167, 69, 0.3);
+        }
+
+        /* Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .form-container {
+                padding: 20px;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            input {
+                font-size: 14px;
+            }
+
+            .register-btn {
+                font-size: 14px;
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="form-container">
+        <h2>Customer Registration</h2>
+        <form name="registerForm" action="Customer" method="post" onsubmit="return validateForm()">
+            <input type="text" name="uname" placeholder="Username" required>
+            <input type="password" name="pword" placeholder="Password" required>
+            <input type="text" name="fname" placeholder="First Name" required>
+            <input type="text" name="lname" placeholder="Last Name" required>
+            <input type="text" name="city" placeholder="City" required>
+            <input type="email" name="mid" placeholder="Mail ID" required>
+            <input type="text" name="phno" placeholder="Phone Number" required>
+            <input type="submit" value="Register" class="register-btn">
+        </form>
+    </div>
+
+    <script>
+        function validateForm() {
+            let phone = document.registerForm.phno.value;
+            let mail = document.registerForm.mid.value;
+            let phonePattern = /^[6-9]\d{9}$/;
+            let mailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+            if (!phonePattern.test(phone)) {
+                alert("Enter a valid 10-digit phone number.");
+                return false;
+            }
+
+            if (!mailPattern.test(mail)) {
+                alert("Enter a valid email address.");
+                return false;
+            }
+
+            return true;
+        }
+    </script>
+
+</body>
+</html>

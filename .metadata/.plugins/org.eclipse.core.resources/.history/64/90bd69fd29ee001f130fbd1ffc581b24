@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h1>Welcome to Our Application!!</h1>
+<a href="Admin.register"> Admin Register</a><br>
+<a href="Admin.login"> Admin Login</a><br>
+
+
+
+</body>
+</html>
